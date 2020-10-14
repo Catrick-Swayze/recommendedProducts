@@ -91,6 +91,18 @@ app.delete('/api/:product_id', async (req, res) => {
   res.end();
 })
 
+app.put('/api/:product_id/', async (req, res) => {
+  let product_id = req.params.product_id;
+  let newBrand = 'Lucky Brand';
+  let updatedBrand = {brand: newBrand};
+
+  const updatedProduct = await RecommendedItem.findOneAndUpdate({id: product_id}, updatedBrand, (err) => {
+    if (err) console.log(err);
+    console.log('Successful update!');
+  });
+  res.end();
+})
+
 const formatName = (string) => {
   return string[0].toUpperCase() + string.split('').slice(1).join('');
 };
