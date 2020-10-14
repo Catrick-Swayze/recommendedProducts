@@ -58,7 +58,7 @@ app.get('/products/id/:productId', async (req, res) => {
 
 // Create Operations
 app.post('/api/newProduct', (req, res) => {
-  let newProductID = 20;
+  let newProductID = 21;
   // Create new fake record
   let newRecord = {
     id: `${newProductID}`,
@@ -79,6 +79,16 @@ app.post('/api/newProduct', (req, res) => {
       res.send(result);
     }
   });
+})
+
+app.delete('/api/:product_id', async (req, res) => {
+  let product_id = req.params.product_id;
+  const deleteProduct = await RecommendedItem.deleteOne({id: product_id}, (err) => {
+    if (err) console.log(err);
+    console.log('Successful deletion!');
+  })
+  console.log('Deleted product: ', deleteProduct);
+  res.end();
 })
 
 const formatName = (string) => {
