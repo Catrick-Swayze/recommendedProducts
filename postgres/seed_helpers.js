@@ -1,4 +1,5 @@
 const faker = require('faker');
+const createCsvWriter = require('csv-writer').createObjectCsvWriter;
 
 // Random Title (fakerJS)
 var randomTitle = () => {
@@ -20,4 +21,15 @@ var randomSimilarityRating = () => {
   return Math.floor(Math.random() * 100 + 1);
 }
 
-module.exports = { randomTitle, randomPrice, randomImage, randomSimilarityRating };
+const csvWriter = createCsvWriter({
+    path: '../../sdc.csv',
+    header: [
+        {id: 'id', title: 'Id'},
+        {id: 'title', title: 'Title'},
+        {id: 'price', title: 'Price'},
+        {id: 'imageurl', title: 'ImageURL'},
+        {id: 'similarityScore', title: 'Similarity Score'}
+    ]
+});
+
+module.exports = { randomTitle, randomPrice, randomImage, randomSimilarityRating, csvWriter };

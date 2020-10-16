@@ -1,14 +1,12 @@
-// This is where we run the script that generates the fake entry and enters it into the database
-const { randomTitle, randomPrice, randomImage, randomSimilarityRating } = require('./seed_helpers.js');
-const { csvWriter } = require('./csvWriter.js');
+const { randomTitle, randomPrice, randomImage, randomSimilarityRating, csvWriter } = require('./seed_helpers.js');
 
 let count = 1;
 let newProducts = [];
 
 let generateCSV = () => {
-  // Creating 100K Records
+  // Creating 1M Records
   // TODO: Increase to 10M when ready
-  while (count <= 100000) {
+  while (count <= 100) {
     debugger;
     let newProduct = {
       id: count,
