@@ -6,7 +6,8 @@ let count = 1;
 let newProducts = [];
 
 let generateCSV = () => {
-  // Creating 100k Records
+  // Creating 100K Records
+  // TODO: Increase to 10M when ready
   while (count <= 100000) {
     debugger;
     let newProduct = {
