@@ -22,7 +22,7 @@ var randomSimilarityRating = () => {
 }
 
 const csvWriter = createCsvWriter({
-    path: '../../sdc.csv',
+    path: './postgres/csvFiles/sdc.csv',
     header: [
         {id: 'id', title: 'Id'},
         {id: 'title', title: 'Title'},
