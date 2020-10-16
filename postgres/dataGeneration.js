@@ -35,3 +35,5 @@ generateProductDataCSV(writeProducts, 'utf-8', () => {
   console.log('Donions');
   writeProducts.end()
 });
+
+module.exports = { generateProductDataCSV }
