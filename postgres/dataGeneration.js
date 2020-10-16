@@ -5,7 +5,8 @@ const writeProducts = fs.createWriteStream('./postgres/csvFiles/sdc.csv');
 writeProducts.write('Id, Title, Price, Image URL, Similarity Score\n', 'utf8');
 
 let generateProductDataCSV = (writer, encoding, callback) => {
-  let i = 10000000;
+  debugger;
+  let i = 5000;
   let id = 0;
   function write () {
     let flow = true;
@@ -14,7 +15,7 @@ let generateProductDataCSV = (writer, encoding, callback) => {
       id += 1;
       var title = randomTitle();
       var price = randomPrice();
-      var imageurl = randomImage();
+      var imageurl = randomImage(i);
       var similarityScore = randomSimilarityRating();
       var data = `${id}, ${title}, ${price}, ${imageurl}, ${similarityScore}\n`;
       if (i === 0) {

@@ -12,8 +12,8 @@ var randomPrice = () => {
 }
 
 // Random Image (fakerJS, but replace with S3)
-var randomImage = () => {
-  return faker.image.imageUrl();
+var randomImage = (int) => {
+  return `https://twzkraus-fec-images.s3-us-west-1.amazonaws.com/target-images/${int % 50}.jpg`;
 }
 
 // Similarity Rating (1-100)
