@@ -8,7 +8,7 @@ var randomTitle = () => {
 
 // Random Price (between 19.99 and 139.99)
 var randomPrice = () => {
-  return Math.floor(Math.random() * 139) + 19.99;
+  return parseFloat((Math.floor(Math.random() * 139) + 19.99).toFixed(2)); // toFixed keeps 2 decimal points, and Parse.float converts back to a float
 }
 
 // Random Image (fakerJS, but replace with S3)
