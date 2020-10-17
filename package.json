@@ -4,6 +4,7 @@
   "description": "Main repository for recommended products module for FEC project",
   "main": "index.js",
   "scripts": {
+    "generateData": "node postgres/dataGeneration.js",
     "test": "jest",
     "seed": "node database/seed.js",
     "start": "nodemon server/start.js",
