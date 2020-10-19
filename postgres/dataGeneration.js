@@ -6,7 +6,7 @@ writeProducts.write('Id, Title, Price, Image URL, Similarity Score\n', 'utf8');
 
 let generateProductDataCSV = (writer, encoding, callback) => {
   debugger;
-  let i = 5000;
+  let i = 10000000;
   let id = 0;
   function write () {
     let flow = true;
