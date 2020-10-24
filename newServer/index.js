@@ -2,7 +2,7 @@ const nr = require('newrelic');
 const express = require('express');
 const path = require('path');
 const PORT = 3030;
-// const cors = require('cors');
+require('dotenv').config()
 
 const app = express();
 

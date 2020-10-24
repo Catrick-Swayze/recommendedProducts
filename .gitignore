@@ -3,3 +3,4 @@ dist/
 csvFiles/
 newrelic.js
 newrelic_agent.log
+.env
