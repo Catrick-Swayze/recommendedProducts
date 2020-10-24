@@ -43,7 +43,7 @@ let generateProductDataCSV = (writer, encoding, callback) => {
       var price = randomPrice();
       var imageurl = randomImage(i);
       var producturl = `/${id % 10000000 + 1}`
-      var data = `${id}, ${title}, ${brand}, ${department}, ${price}, ${imageurl}, ${producturl}\n`;
+      var data = `${id},${title},${brand},${department},${price},${imageurl},${producturl}\n`;
       if (i === 0) {
         writer.write(data, encoding, callback)
       } else {

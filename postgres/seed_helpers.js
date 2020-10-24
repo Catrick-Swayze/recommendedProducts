@@ -13,7 +13,8 @@ var randomPrice = () => {
 
 // Random Image (fakerJS, but replace with S3)
 var randomImage = (int) => {
-  return `https://twzkraus-fec-images.s3-us-west-1.amazonaws.com/target-images/${int % 50}.jpg`;
+  // return `https://twzkraus-fec-images.s3-us-west-1.amazonaws.com/target-images/${int % 50}.jpg`;
+  return 'https://sdctestbucket.s3.amazonaws.com/tarjay-sample-1.jpeg';
 }
 
 const csvWriter = createCsvWriter({
