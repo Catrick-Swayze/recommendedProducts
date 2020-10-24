@@ -1,13 +1,12 @@
 const nr = require('newrelic');
 const express = require('express');
 const path = require('path');
-const PORT = 3030;
 require('dotenv').config()
-
+const client = require('../postgres/index.js');
 const app = express();
 
 // Middleware
-// app.use(cors());
+// app.use(express.json()); // req.body (might not need yet because may just need to use req.params)
 app.use(express.static(path.join(__dirname, '..', 'dist')));
 
 // Routers
@@ -16,12 +15,18 @@ app.get('/', (req, res) => {
   res.end();
 })
 
-app.get('/products/id/:product_id', (req, res) => {
-  console.log(`Successful get at ${req.params.product_id}`);
-  res.send([]);
+app.get('/products/id/:product_id', async(req, res) => {
+  const { product_id } =  req.params;
+  try {
+    const product = await client.query('SELECT * FROM products WHERE id=$1', [`${product_id}`])
+    await console.log(`Successful get at ${product_id}`);
+    res.send(product.rows);
+  } catch(err) {
+    console.error(err.message)
+  }
 })
 
 // Open Port
-app.listen(PORT, () => {
-  console.log('Listening on port', PORT)
+app.listen(process.env.NODE_PORT, () => {
+  console.log('Listening on port', process.env.NODE_PORT)
 })
