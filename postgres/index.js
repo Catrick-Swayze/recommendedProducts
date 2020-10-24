@@ -24,8 +24,10 @@ const client = new Client({
 })
 client.connect()
   .then(() => console.log('Connected to Postgres successfully!'))
+  .then(() => client.query('SELECT * FROM products WHERE id=1'))
+  .then((result) => console.table(result.rows))
   .catch((e) => console.error(e))
-  .finally(() => {client.end()})
+  .finally(() => client.end())
 
 // client.query('SELECT * FROM products WHERE id=1', (err, res) => {
 //   console.log(err, res)
