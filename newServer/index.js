@@ -67,12 +67,26 @@ app.get('/products/id/:product_id', async(req, res) => {
   const { product_id } =  req.params;
   try {
     const product = await client.query('SELECT * FROM products WHERE id<$1', [`25`])
-    await console.log(`Successful get at ${product_id}`);
-    //console.table(product.rows);
+    //await console.log(`Successful get at ${product_id}`);
     res.send(product.rows);
   } catch(err) {
     console.error(err.message)
   }
+})
+
+app.post('/newProduct', async(req, res) => {
+  // Receive the data
+  try {
+    await client.query("BEGIN");
+    await client.query("insert into products values ($1, $2, $3, $4, $5, $6, $7)", [10000010, 'Sample Title', 'Sample Brand', 'SampleBrand', 120.99, 'https://sdctestbucket.s3.amazonaws.com/tarjay-sample-1.jpeg', '/123abc']);
+    console.log('Inserted new row');
+    await client.query('COMMIT');
+    res.send('Success!');
+  } catch (ex) {
+    console.log(`Failed to execute: ${ex}`);
+  }
+  //const { product_id } =  req.params; // can we auto assign the id?
+  // Add a finally encapsulation?
 })
 
 // Open Port
