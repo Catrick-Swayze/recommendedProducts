@@ -7,7 +7,7 @@ const app = express();
 const axios = require('axios');
 
 // Middleware
-// app.use(express.json()); // req.body (might not need yet because may just need to use req.params)
+app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', 'dist')));
 
 // Routers
@@ -75,26 +75,25 @@ app.get('/products/id/:product_id', async(req, res) => {
 })
 
 // Post request helper
-var currentID = 10000011;
+var currentID = 10000000;
 var getCurrentID = (id) => {
-  id++;
+  id += currentID;
   currentID++;
   return id;
 }
 
 app.post('/newProduct', async(req, res) => {
-  // Receive the data
+  const { id, title, brand, department, price, imageurl, producturl } = req.body;
   try {
-    const newProductID = await getCurrentID(currentID);
+    const newProductID = await getCurrentID(id);
     await client.query("BEGIN");
-    await client.query("insert into products values ($1, $2, $3, $4, $5, $6, $7)", [`${newProductID}`, 'Sample Title', 'Sample Brand', 'SampleBrand', 120.99, 'https://sdctestbucket.s3.amazonaws.com/tarjay-sample-1.jpeg', '/123abc']);
-    console.log('Inserted new row');
+    await client.query("insert into products values ($1, $2, $3, $4, $5, $6, $7)", [`${newProductID}`, `${title}`, `${brand}`, `${department}`, `${price}`, `${imageurl}`, `${producturl}`]);
+    // console.log('Inserted new row');
     await client.query('COMMIT');
-    res.send('Success!');
+    res.send('Success all day!');
   } catch (ex) {
     console.log(`Failed to execute: ${ex}`);
   }
-  //const { product_id } =  req.params; // can we auto assign the id?
   // Add a finally encapsulation?
 })
 
