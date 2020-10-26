@@ -5,9 +5,11 @@ require('dotenv').config()
 const client = require('../postgres/index.js');
 const app = express();
 const axios = require('axios');
+const cors = require('cors');
 
 // Middleware
 app.use(express.json());
+app.use(cors());
 app.use(express.static(path.join(__dirname, '..', 'dist')));
 
 // Routers
