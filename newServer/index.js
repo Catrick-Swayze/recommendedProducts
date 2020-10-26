@@ -74,11 +74,20 @@ app.get('/products/id/:product_id', async(req, res) => {
   }
 })
 
+// Post request helper
+var currentID = 10000011;
+var getCurrentID = (id) => {
+  id++;
+  currentID++;
+  return id;
+}
+
 app.post('/newProduct', async(req, res) => {
   // Receive the data
   try {
+    const newProductID = await getCurrentID(currentID);
     await client.query("BEGIN");
-    await client.query("insert into products values ($1, $2, $3, $4, $5, $6, $7)", [10000010, 'Sample Title', 'Sample Brand', 'SampleBrand', 120.99, 'https://sdctestbucket.s3.amazonaws.com/tarjay-sample-1.jpeg', '/123abc']);
+    await client.query("insert into products values ($1, $2, $3, $4, $5, $6, $7)", [`${newProductID}`, 'Sample Title', 'Sample Brand', 'SampleBrand', 120.99, 'https://sdctestbucket.s3.amazonaws.com/tarjay-sample-1.jpeg', '/123abc']);
     console.log('Inserted new row');
     await client.query('COMMIT');
     res.send('Success!');
