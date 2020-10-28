@@ -1,6 +1,8 @@
-node_modules/
+node_modules
 dist/
 csvFiles/
+newrelic.js
+newrelic_agent.log
 .env
 .DS_Store
 postgres/.DS_Store

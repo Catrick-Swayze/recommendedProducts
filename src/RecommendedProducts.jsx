@@ -32,8 +32,9 @@ const RecommendedProducts = ({totalItems, itemsShown, heading}) => {
 
   useEffect(() => {
     if (Number.isInteger(parseInt(productId))) {
-      axios.get(`http://localhost:3003/products/id/${productId}`)
+      axios.get(`http://localhost:3030/products/id/${productId}`)
         .then(results => {
+          console.log(results.data);
           setAllItems(results.data.slice(offset, offset + numItems));
         });
     }

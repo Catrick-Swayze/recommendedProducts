@@ -13,12 +13,8 @@ var randomPrice = () => {
 
 // Random Image (fakerJS, but replace with S3)
 var randomImage = (int) => {
-  return `https://twzkraus-fec-images.s3-us-west-1.amazonaws.com/target-images/${int % 50}.jpg`;
-}
-
-// Similarity Rating (1-100)
-var randomSimilarityRating = () => {
-  return Math.floor(Math.random() * 100 + 1);
+  // return `https://twzkraus-fec-images.s3-us-west-1.amazonaws.com/target-images/${int % 50}.jpg`;
+  return 'https://sdctestbucket.s3.amazonaws.com/tarjay-sample-1.jpeg';
 }
 
 const csvWriter = createCsvWriter({
@@ -26,10 +22,18 @@ const csvWriter = createCsvWriter({
     header: [
         {id: 'id', title: 'Id'},
         {id: 'title', title: 'Title'},
+        {id: 'brand', title: 'Brand'},
+        {id: 'department', title: 'Department'},
         {id: 'price', title: 'Price'},
         {id: 'imageurl', title: 'ImageURL'},
-        {id: 'similarityScore', title: 'Similarity Score'}
+        {id: 'producturl', title: 'ProductURL'}
     ]
 });
 
-module.exports = { randomTitle, randomPrice, randomImage, randomSimilarityRating, csvWriter };
+
+// Similarity Rating (1-100)
+// var randomSimilarityRating = () => {
+//   return Math.floor(Math.random() * 100 + 1);
+// }
+
+module.exports = { randomTitle, randomPrice, randomImage, csvWriter };
