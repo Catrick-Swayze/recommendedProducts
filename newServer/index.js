@@ -5,9 +5,11 @@ require('dotenv').config()
 const client = require('../postgres/index.js');
 const app = express();
 const axios = require('axios');
+const cors = require('cors');
 
 // Middleware
-// app.use(express.json()); // req.body (might not need yet because may just need to use req.params)
+app.use(express.json());
+app.use(cors());
 app.use(express.static(path.join(__dirname, '..', 'dist')));
 
 // Routers
@@ -67,12 +69,34 @@ app.get('/products/id/:product_id', async(req, res) => {
   const { product_id } =  req.params;
   try {
     const product = await client.query('SELECT * FROM products WHERE id<$1', [`25`])
-    await console.log(`Successful get at ${product_id}`);
-    //console.table(product.rows);
+    //await console.log(`Successful get at ${product_id}`);
     res.send(product.rows);
   } catch(err) {
     console.error(err.message)
   }
+})
+
+// Post request helper
+var currentID = 10000000;
+var getCurrentID = (id) => {
+  id += currentID;
+  currentID++;
+  return id;
+}
+
+app.post('/newProduct', async(req, res) => {
+  const { id, title, brand, department, price, imageurl, producturl } = req.body;
+  try {
+    const newProductID = await getCurrentID(id);
+    await client.query("BEGIN");
+    await client.query("insert into products values ($1, $2, $3, $4, $5, $6, $7)", [`${newProductID}`, `${title}`, `${brand}`, `${department}`, `${price}`, `${imageurl}`, `${producturl}`]);
+    // console.log('Inserted new row');
+    await client.query('COMMIT');
+    res.send('Success all day!');
+  } catch (ex) {
+    console.log(`Failed to execute: ${ex}`);
+  }
+  // Add a finally encapsulation?
 })
 
 // Open Port
