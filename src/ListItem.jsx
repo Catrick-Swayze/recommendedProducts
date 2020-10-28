@@ -12,7 +12,7 @@ const ListItem = ({item, visible}) => {
     return (
       <RecListItem key={`${item.id}-item`} onClick={(e) => {handleClick(e)}}>
         <RecItemAnchor key={`${item.id}-anchor`} href={item.productUrl}>
-          <RecItemImage key={`${item.id}-image`} src={item.imageUrl} ></RecItemImage>
+          <RecItemImage key={`${item.id}-image`} src={item.imageurl} ></RecItemImage>
           <RecItemPrice key={`${item.id}-price`}>${item.price}</RecItemPrice>
         </RecItemAnchor>
       </RecListItem>
