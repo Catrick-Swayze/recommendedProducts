@@ -1,3 +1,4 @@
+const nr = require('newrelic');
 const express = require('express');
 const RecommendedItem = require('../database/RecommendedItem.js');
 const path = require('path');
