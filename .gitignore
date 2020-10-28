@@ -4,3 +4,5 @@ csvFiles/
 newrelic.js
 newrelic_agent.log
 .env
+.DS_Store
+postgres/.DS_Store
